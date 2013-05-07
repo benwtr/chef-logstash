@@ -137,6 +137,8 @@ when "ruby"
     create "644 kibana kibana"
   end
 
+  kibana_version = node['logstash']['kibana']['sha']
+
   server_auth_method = node['logstash']['kibana']['auth']['server_auth_method']
   if server_auth_method
     include_recipe "apache2"
@@ -176,8 +178,6 @@ when "php"
   include_recipe "apache2"
   include_recipe "apache2::mod_php5"
   include_recipe "php::module_curl"
-
-  kibana_version = node['logstash']['kibana']['sha']
 
   apache_module "php5" do
     action :enable
